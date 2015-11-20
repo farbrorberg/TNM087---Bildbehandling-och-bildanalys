@@ -7,3 +7,5 @@
 SimpleReplace('BoldRedEye.JPG', [200 400 7], [150 300 7], [500, 600, 200, 200] )
 
 %% Task 3
+
+EllipsMask(imread('einstein.jpg'));
