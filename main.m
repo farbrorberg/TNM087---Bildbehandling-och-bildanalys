@@ -12,3 +12,8 @@ EllipsMask(imread('einstein.jpg'));
 
 %% Task 4
 WhitePoint(imread('kitten.jpg'),'b');
+
+%% Task 5
+
+GammaCorrection( imread('kitten.jpg'), 2, 0.3, 0.8 );
+                                    % Gamma, Lower, Upper
