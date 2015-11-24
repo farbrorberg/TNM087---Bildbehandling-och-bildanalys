@@ -15,5 +15,5 @@ WhitePoint(imread('kitten.jpg'),'b');
 
 %% Task 5
 
-GammaCorrection( imread('kitten.jpg'), 2, 0.3, 0.8 );
+GammaCorrection( imread('kitten.jpg'), 0.5, 0.6, 0.7 );
                                     % Gamma, Lower, Upper

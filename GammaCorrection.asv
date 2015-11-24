@@ -55,7 +55,7 @@ function GImage = GammaCorrection( OImage, Gamma, Lower, Upper )
 %
 OImage = im2double(OImage);
 [sx,sy,nc] = size(OImage);
-GImage = OImage;
+GImage = OImage.^Gamma;
 
 %% Lower and upper gray value boundaries
 %
@@ -67,12 +67,13 @@ uppgv = quantile(GImage(:),Upper);
 % the upper-bound gray value is one 
 % because 0^Gamma = 0 and 1^Gamma = 1
 %
-
-GImage = (GImage - lowgv)/(uppgv-lowgv);
+Red = OImage 
+%GImage = 
 
 %% Actual mapping of the previous result 
 %
-GImage = GImage.^Gamma;
+%GImage(  ) = .^ %mapping
+
 
 end
 
