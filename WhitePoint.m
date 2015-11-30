@@ -60,8 +60,10 @@ if (nargin < 2)
 else
     if strcmp(type,'b')
         otype = 'b';
-    else
+    else if strcmp(type,'d')
         otype = 'd';
+    else
+        otype = 's';
     end
 end;
 
@@ -70,7 +72,7 @@ end;
 %% Find out the type of the input image 
 % You can assume that it is either uint8 or double
 %
-    if isa(OImage,'uint8')
+    if isa(OImage,'uint8') || isa(OImage,'uint16')
         InputImage = im2double(OImage);
     else
         InputImage = OImage;
@@ -104,11 +106,11 @@ InputImage(InputImage > 1) = 1; % All RGB-values over max is set to white
 %% Generate the result image CImage
 switch otype
     case 'b' %uint8
-        CImage = im2double(InputImage); % Convert back to double
+        CImage = im2uint8(InputImage); % Convert to correct format
     case 'd' %double
-        CImage = InputImage;
-    otherwise 
-%         if you do the extended version add your code here
+        CImage = im2double(InputImage);% Convert to correct format
+    otherwise %unit16
+        CImage = im2uint16(InputImage);% Convert to correct format
 end 
 
 imshow(CImage);

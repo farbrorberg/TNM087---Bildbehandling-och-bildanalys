@@ -7,8 +7,8 @@ function [ ImSize, ImType, BitPerPixel, MaxMin, RGBpts, figh ] = ...
 %
 %% Who has done it
 %
-% Author: Matthias Berg, matbe790
-% Co-author: Jens Kaske, jenka755
+% Author: Jens Kaske, jenka755
+% Co-author:  Matthias Berg, matbe790
 %
 %% Syntax of the function
 %
@@ -88,9 +88,11 @@ end
 figh = figure;
 
 DImage = OImage;
+
 for k = 1:nopts
-          DImage = insertShape(DImage, 'FilledRectangle', [round(PtPos(k,1)), round(PtPos(k,2)),Qsize, Qsize], 'Color', 'white', 'Opacity', 1);
+    DImage(round(PtPos(k,2)-Qsize/2:PtPos(k,2)+Qsize/2), round(PtPos(k)-Qsize/2:PtPos(k)+Qsize/2), :) = 255;
 end
+
 imshow(DImage);
 
 end

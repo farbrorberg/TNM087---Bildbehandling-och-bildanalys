@@ -68,11 +68,11 @@ uppgv = quantile(GImage(:),Upper);
 % because 0^Gamma = 0 and 1^Gamma = 1
 %
 
-GImage = (GImage - lowgv)/(uppgv-lowgv);
+GImage = (GImage - lowgv)/(uppgv-lowgv); %'scale' image using input
 
 %% Actual mapping of the previous result 
 %
-GImage = GImage.^Gamma;
+GImage = GImage.^Gamma;  
 
 end
 
