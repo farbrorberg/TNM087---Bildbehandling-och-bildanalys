@@ -20,3 +20,11 @@ GammaCorrection( imread('kitten.jpg'), 0.5, 0.6, 0.7 );
 %% Task 6
 
 Vignette( imread('CWhite1.jpg'), imread('HWhite1.jpg'), 50 );
+
+%% Task 7
+
+FRotate(imread('kitten.jpg'), [400 200], 90 );
+
+%% Task 8
+load('AutoFocus32x32Patches.mat')
+Sharpness(winsuint8);
