@@ -67,8 +67,9 @@ uppgv = quantile(GImage(:),Upper);
 % the upper-bound gray value is one 
 % because 0^Gamma = 0 and 1^Gamma = 1
 %
-
 GImage = (GImage - lowgv)/(uppgv-lowgv); %'scale' image using input
+GImage(GImage > 1) = 1;
+GImage(GImage < 0) = 0;
 
 %% Actual mapping of the previous result 
 %
