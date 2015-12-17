@@ -23,7 +23,8 @@ Vignette( imread('CWhite1.jpg'), imread('HWhite1.jpg'), 50 );
 
 %% Task 7
 
-FRotate(imread('kitten.jpg'), [400 200], 90 );
+imshow(FRotate(imread('BoldRedEye.JPG'), [200 200], 180 ));
+
 
 %% Task 8
 load('AutoFocus32x32Patches.mat')

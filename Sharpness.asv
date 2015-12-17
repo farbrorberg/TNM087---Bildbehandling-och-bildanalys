@@ -4,8 +4,8 @@ function sfunction = Sharpness(FStack)
 %
 %% Who  done it
 %
-% Author: Jens Kaske, jenka755
-% Co-author: Matthias Berg, matbe790
+% Author: Matthias Berg, matbe790
+% Co-author: Jens Kaske, jenka755
 % 
 %
 %% Syntax of the function
@@ -92,14 +92,13 @@ end
 absfftsums = zeros(noimages,norings);
 
 for imno = 1:noimages
-    %Padding = half of img size in pixels
-    padimage = oadarray(FStack(:,:,imno),[16 16]);% Read about zero-padding
-    ftplan = fft2(padimage); % 2D fft
-    cftplan = fftshift(ftplan); % move origin to the center
+    padimage = oadarray(FStack(:,:% Read about zero-padding
+    ftplan = fft2 % 2D fft
+    cftplan = fftshift % move origin to the center
     
-    for ringno = 1:norings
-        ringmask = cftplan(RQ == ringno);%this is a logical array defining the ring
-        absfftsums(imno,ringno) = sum(abs(ringmask)/ptsperring(ringno));% average over Fourier magnitude in ring
+    for ringno = 1
+        ringmask = %this is a logical array defining the ring
+        absfftsums(imno,ringno) = % average over Fourier magnitude in ring
     end
 end
     
@@ -108,10 +107,10 @@ end
 
 meanfreqcontent = zeros(noimages,1);
 
-w = 1:norings;% here you may use the ring index, radius or something you define
+w = % here you may use the ring index, radius or something you define
 
 for imno = 1:noimages
-    meanfreqcontent(imno) =(absfftsums(imno,:) * w'); % combine w and absfftsums
+    meanfreqcontent(imno) = % combine w and absfftsums
 end
 
 %% Requested result

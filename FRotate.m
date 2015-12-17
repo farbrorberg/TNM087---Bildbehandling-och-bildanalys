@@ -51,51 +51,61 @@ function RImage = FRotate(OImage, center, degangle )
 %% Information about the image (size, type etc)
 %       You can assume that it has uint8 pixels 
 %       What should you do if this is not the case?
-%
+%       OImage = im2uint8(OImage);
 [sr,sc,nc] = size(OImage);
 
 %% Generate coordinate vectors for the shifted coordinate system
 % (this means converting the index vector for a pixel to the 
 %   coordinate vector of the same pixel)
 %
-ir = OImage(center(1),:, :); %index vector for pixels along first Matlab dimension
-ic = OImage(:,center(2), :);%same in the second direction
+ir = [1:sr]; %index vector for pixels along first Matlab dimension
+ic = [1:sc]';  %same in the second direction
 
-cir = %shifted ir vector so that center(1) is the origin
-cic = %Same for the second axis
+cir = ir - center(1);  %shifted ir vector so that center(1) is the origin
+cic = ic - center(2);  %Same for the second axis
 
 %% Use cir and cic in meshgrid to generate a coordinate grid
 %
-[C,R] = meshgrid % cir, cic
+[C,R] = meshgrid(cic, cir); % cir, cic
 
 %% The polar mesh coordinates are computed with cart2pol
 %
-[Theta,Rho] = cart2pol %
+[Theta,Rho] = cart2pol(C,R); %
 
 %% Convert the degress, modify the angles and 
 %   transform back to Euclidean coordinates 
 %   you may skip the next two lines and modify the input to pol2cart
 %   if you want
 
-rads = % degs...
-TNew = % use Theta and degs
+rads = (degangle*pi)/180;
+TNew = Theta-rads; % use Theta and degs
+%RNew = sqrt((center(1)^2) + ((center(2)^2)));
 
-[nC,nR] = pol2cart %
+[nC,nR] = pol2cart(TNew, Rho); %
 
 %% Compute the index vector from the coordinate vector inverting the 
 % previous conversion from ir to cir and ic to cic
 
-newir =
-newic = 
+newir = round(nR) + center(2);
+newic = round(nC) + center(1);
 
-%% Now use nearest neighbor interpolation (round) and rotate
+newir(newir > sr) = 0;
+newic(newic > sc) = 0;
+
+newir(newir < 1) = 0;
+newic(newic < 1) = 0;
+
+%% Now use "nearest-neighbor-interpolation-(round)-and-rotate"-method
 
 RImage = uint8(zeros(sr,sc,nc));
 
-
-for k = 1:
-    for l = 1:
-        RImage( % = Oimage(
+for k = 1:sr
+    for l = 1:sc
+        if(newir(k,l) ~= 0) && (newic(k,l) ~= 0)
+            RImage(k,l,:) = OImage(newir(k,l),newic(k,l), :);
+        %else
+        %    RImage(k,l,:) = 0;
+        end
     end
 end
 
